@@ -3,8 +3,7 @@ import dialogflow_v2 as dialogflow
 import dialogflow_v2beta1 as dialogflow_beta
 from shape_intents import shape_intents_from_file
 
-project_id = os.environ('DIALOGFLOW_PROJECT_ID')
-google_app_credentials = os.environ('GOOGLE_APPLICATION_CREDENTIALS')
+project_id = os.environ['DIALOGFLOW_PROJECT_ID']
 training_questions_file_name = 'training_questions.json'
 
 
