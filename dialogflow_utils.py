@@ -1,4 +1,11 @@
 import dialogflow_v2 as dialogflow
+from google.cloud import storage
+
+
+def implicit():
+    storage_client = storage.Client()
+    buckets = list(storage_client.list_buckets())
+    return buckets
 
 
 def detect_intent_texts(project_id, session_id, text, language_code):
