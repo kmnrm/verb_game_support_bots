@@ -15,7 +15,8 @@ platform by [Google](https://google.com).
     - [Logging bot](#23-logging-bot)
 - [Running the script](#3-running-the-script)
 
-You can find the examples of the working bots in [Running the script](#3-running-the-script) section.
+You can find the examples of the working bots in [Running the script](#3-running-the-script) section. 
+Check out [VK bot](https://vk.com/club194961497) by sending a message with [questions](https://dvmn.org/media/filer_public/a7/db/a7db66c0-1259-4dac-9726-2d1fa9c44f20/questions.json) to the group (see the values of `questions` key).
 
 ### 1. DialogFlow Agent
 To setup and train a DialogFlow agent follow the steps below.
