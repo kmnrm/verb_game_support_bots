@@ -24,7 +24,7 @@ def reply_user(bot, update):
 
 
 def main():
-    logger.info('Бот запущен')
+    logger.info('Telegram бот запущен')
     try:
         implicit()
         updater = Updater(TOKEN)
