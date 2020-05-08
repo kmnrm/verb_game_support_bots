@@ -1,14 +1,11 @@
 import random
 import os
+from dotenv import load_dotenv
 import telegram
 from vk_api.longpoll import VkLongPoll, VkEventType
 from vk_api import VkApi
 from bots_tg_logger import get_logger
 from dialogflow_utils import detect_intent_texts, implicit
-
-TOKEN = os.environ['VK_BOT_TOKEN']
-PROJECT_ID = os.environ['DIALOGFLOW_PROJECT_ID']
-LANGUAGE_CODE = 'ru-RU'
 
 
 def reply(event, vk_api):
@@ -37,6 +34,10 @@ def main():
 
 
 if __name__ == "__main__":
+    load_dotenv()
+    TOKEN = os.environ['VK_BOT_TOKEN']
+    PROJECT_ID = os.environ['DIALOGFLOW_PROJECT_ID']
+    LANGUAGE_CODE = 'ru-RU'
     logging_bot_token = os.environ['LOGGING_BOT_TOKEN']
     logging_chat_id = os.environ['LOGGING_BOT_CHAT_ID']
     logging_bot = telegram.Bot(token=logging_bot_token)

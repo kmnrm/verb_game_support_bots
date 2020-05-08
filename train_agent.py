@@ -1,14 +1,10 @@
 import os
+from dotenv import load_dotenv
 import logging
 import dialogflow_v2 as dialogflow
 import dialogflow_v2beta1 as dialogflow_beta
 from shape_intents import shape_intents_from_file
 from google.api_core.exceptions import PermissionDenied, InvalidArgument
-
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                    level=logging.DEBUG)
-project_id = os.environ['DIALOGFLOW_PROJECT_ID']
-training_questions_file_name = 'training_questions.json'
 
 
 def main():
@@ -36,4 +32,9 @@ def main():
 
 
 if __name__ == "__main__":
+    load_dotenv()
+    logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                        level=logging.DEBUG)
+    project_id = os.environ['DIALOGFLOW_PROJECT_ID']
+    training_questions_file_name = 'training_questions.json'
     main()

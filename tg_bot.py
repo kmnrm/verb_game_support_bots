@@ -1,13 +1,9 @@
 import os
+from dotenv import load_dotenv
 import telegram
 from telegram.ext import Updater, MessageHandler, Filters, CommandHandler
 from bots_tg_logger import get_logger
 from dialogflow_utils import detect_intent_texts, implicit
-
-TOKEN = os.environ['TELEGRAM_BOT_TOKEN']
-CHAT_ID = os.environ['TELEGRAM_CHAT_ID']
-PROJECT_ID = os.environ['DIALOGFLOW_PROJECT_ID']
-LANGUAGE_CODE = 'ru-RU'
 
 
 def start(bot, update):
@@ -37,6 +33,11 @@ def main():
 
 
 if __name__ == '__main__':
+    load_dotenv()
+    TOKEN = os.environ['TELEGRAM_BOT_TOKEN']
+    CHAT_ID = os.environ['TELEGRAM_CHAT_ID']
+    PROJECT_ID = os.environ['DIALOGFLOW_PROJECT_ID']
+    LANGUAGE_CODE = 'ru-RU'
     logging_bot_token = os.environ['LOGGING_BOT_TOKEN']
     logging_chat_id = os.environ['LOGGING_BOT_CHAT_ID']
     logging_bot = telegram.Bot(token=logging_bot_token)
