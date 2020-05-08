@@ -2,4 +2,3 @@ python_telegram_bot==11.1.0
 vk_api==11.8.0
 dialogflow==0.8.0
 google-cloud-storage==1.28.0
-vk-api==11.8.0
