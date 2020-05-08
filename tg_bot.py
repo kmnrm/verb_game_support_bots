@@ -17,6 +17,8 @@ def start(bot, update):
 def reply_user(bot, update):
     text = update.message.text
     reply = detect_intent_texts(PROJECT_ID, CHAT_ID, text, LANGUAGE_CODE)
+    if reply is None:
+        update.message.reply_text('Ваш запрос непонятен.')
     update.message.reply_text(reply)
 
 
