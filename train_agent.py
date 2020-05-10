@@ -13,7 +13,7 @@ def main():
     logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                         level=logging.DEBUG)
     project_id = os.environ['DIALOGFLOW_PROJECT_ID']
-    training_questions_file_name = 'training_questions.json'
+    training_questions_file_name = os.getenv('TRAINING_QUESTIONS_FILE_PATH')
     try:
         intents_client = dialogflow.IntentsClient()
         intents_parent = intents_client.project_agent_path(project_id)
