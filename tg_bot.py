@@ -14,8 +14,9 @@ def start(bot, update):
 
 
 def reply_user(bot, update):
+    session_id = f'tg-{chat_id}'
     text = update.message.text
-    reply = detect_intent_texts(project_id, chat_id, text, language_code)
+    reply = detect_intent_texts(project_id, session_id, text, language_code)
     if reply is None:
         update.message.reply_text('Ваш запрос непонятен.')
         return

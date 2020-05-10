@@ -12,7 +12,8 @@ logger = logging.getLogger('bots_logger')
 
 
 def reply(event, vk_api):
-    reply = detect_intent_texts(project_id, event.user_id, event.text, language_code)
+    session_id = f'vk-{event.user_id}'
+    reply = detect_intent_texts(project_id, session_id, event.text, language_code)
     if reply is None:
         return
     vk_api.messages.send(
