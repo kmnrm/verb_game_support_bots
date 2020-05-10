@@ -27,10 +27,11 @@ def shape_intents_from_file(training_questions_json_file_name):
                 }
                 for message in answers
             ]
-            intent = {"display_name": intent_name,
-                      "messages": messages,
-                      "training_phrases": training_phrases
-                      }
+            intent = {
+                "display_name": intent_name,
+                "messages": messages,
+                "training_phrases": training_phrases
+            }
             intents.append(intent)
         logging.debug('Intents shaped')
         return intents
