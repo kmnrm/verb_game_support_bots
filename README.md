@@ -42,7 +42,7 @@ your agent. Read more about [intents](https://cloud.google.com/dialogflow/docs/i
         - `Как устроиться к вам на работу?` for a training phrase.
         - The value of `answer` key for the training phrase response.
     
-    2. Run `train intents.py` to train your agent with the training phrases from your
+    2. Run `train_agent.py` to train your agent with the training phrases from your
     `training_phrases.json` file. Check it out in the intents of your agent page.
     ![](https://sun9-11.userapi.com/c855020/v855020890/2339ca/nssJOMEr_Po.jpg)
 
@@ -132,7 +132,7 @@ Try to avoid the names that are equal to the communities' names that you've alre
 2. Go to your community settings and [enable community messages](https://vk.com/support/faq9605).
 3. Open the **Manage community** tab, go to **API usage** tab and click **Create token**.
 
-Set your `vk-bot` Heroku app following the the [steps 1 to 4](#set-your-heroku-app).
+Set your `vk-bot` Heroku app following the [steps 1 to 4](#set-your-heroku-app).
 
 ##### Set config vars 
 After your app successfully deployed go to `Settings` tab and add your `Config Vars`. 
