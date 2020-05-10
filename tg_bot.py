@@ -15,7 +15,7 @@ def start(bot, update):
 
 def reply_user(bot, update):
     text = update.message.text
-    reply = detect_intent_texts(PROJECT_ID, CHAT_ID, text, LANGUAGE_CODE)
+    reply = detect_intent_texts(project_id, chat_id, text, language_code)
     if reply is None:
         update.message.reply_text('Ваш запрос непонятен.')
         return
@@ -32,15 +32,15 @@ if __name__ == '__main__':
     logging_bot = telegram.Bot(token=logging_bot_token)
     logger.addHandler(MyLogsHandler(logging_bot, logging_chat_id))
 
-    TOKEN = os.environ['TELEGRAM_BOT_TOKEN']
-    CHAT_ID = os.environ['TELEGRAM_CHAT_ID']
-    PROJECT_ID = os.environ['DIALOGFLOW_PROJECT_ID']
-    LANGUAGE_CODE = 'ru-RU'
+    token = os.environ['TELEGRAM_BOT_TOKEN']
+    chat_id = os.environ['TELEGRAM_CHAT_ID']
+    project_id = os.environ['DIALOGFLOW_PROJECT_ID']
+    language_code = 'ru-RU'
 
     logger.info('Telegram бот запущен')
     try:
         implicit()
-        updater = Updater(TOKEN)
+        updater = Updater(token)
         dp = updater.dispatcher
         dp.add_handler(CommandHandler("start", start))
         dp.add_handler(MessageHandler(Filters.text, reply_user))

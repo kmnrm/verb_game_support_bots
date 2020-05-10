@@ -10,8 +10,9 @@ from dialogflow_utils import detect_intent_texts, implicit
 
 logger = logging.getLogger('bots_logger')
 
+
 def reply(event, vk_api):
-    reply = detect_intent_texts(PROJECT_ID, event.user_id, event.text, LANGUAGE_CODE)
+    reply = detect_intent_texts(project_id, event.user_id, event.text, language_code)
     if reply is None:
         return
     vk_api.messages.send(
@@ -31,14 +32,14 @@ if __name__ == "__main__":
     logging_bot = telegram.Bot(token=logging_bot_token)
     logger.addHandler(MyLogsHandler(logging_bot, logging_chat_id))
 
-    TOKEN = os.environ['VK_BOT_TOKEN']
-    PROJECT_ID = os.environ['DIALOGFLOW_PROJECT_ID']
-    LANGUAGE_CODE = 'ru-RU'
+    token = os.environ['VK_BOT_TOKEN']
+    project_id = os.environ['DIALOGFLOW_PROJECT_ID']
+    language_code = 'ru-RU'
 
     logger.info('VK бот запущен')
     try:
         implicit()
-        vk_session = VkApi(token=TOKEN)
+        vk_session = VkApi(token=token)
         vk_api = vk_session.get_api()
         longpoll = VkLongPoll(vk_session)
         for event in longpoll.listen():
