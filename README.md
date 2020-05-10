@@ -36,7 +36,11 @@ Do not forget to create and download your [service account __JSON__-key](https:/
 4. To work via DialogFlow, you need to create intents and train 
 your agent. Read more about [intents](https://cloud.google.com/dialogflow/docs/intents-overview).
 
-    1. Create and save training phrases `json` file in the project path and name it `training_phrases.json`. In the [example](https://dvmn.org/media/filer_public/a7/db/a7db66c0-1259-4dac-9726-2d1fa9c44f20/questions.json) of 
+    1. Create and save training phrases `json` file. Create `.env` file in the project directory. Set the path to your training questions file in your `.env`:
+        ```
+       TRAINING_QUESTIONS_FILE_PATH=the_path_to_your_questions_json_file
+        ```
+        In the [example](https://dvmn.org/media/filer_public/a7/db/a7db66c0-1259-4dac-9726-2d1fa9c44f20/questions.json) of 
     `training_phrases.json` there is:
         - `Устройство на работу` for an intent name.
         - `Как устроиться к вам на работу?` for a training phrase.
