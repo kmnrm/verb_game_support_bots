@@ -1,9 +1,12 @@
 import os
+import logging
 from dotenv import load_dotenv
 import telegram
 from telegram.ext import Updater, MessageHandler, Filters, CommandHandler
-from bots_tg_logger import get_logger
+from logs_handler import MyLogsHandler
 from dialogflow_utils import detect_intent_texts, implicit
+
+logger = logging.getLogger('bots_logger')
 
 
 def start(bot, update):
@@ -21,14 +24,19 @@ def reply_user(bot, update):
 
 if __name__ == '__main__':
     load_dotenv()
+    logging.basicConfig(
+        format='%(asctime)s - %(levelname)s - %(message)s')
+    logger.setLevel(logging.DEBUG)
+    logging_bot_token = os.environ['LOGGING_BOT_TOKEN']
+    logging_chat_id = os.environ['LOGGING_BOT_CHAT_ID']
+    logging_bot = telegram.Bot(token=logging_bot_token)
+    logger.addHandler(MyLogsHandler(logging_bot, logging_chat_id))
+
     TOKEN = os.environ['TELEGRAM_BOT_TOKEN']
     CHAT_ID = os.environ['TELEGRAM_CHAT_ID']
     PROJECT_ID = os.environ['DIALOGFLOW_PROJECT_ID']
     LANGUAGE_CODE = 'ru-RU'
-    logging_bot_token = os.environ['LOGGING_BOT_TOKEN']
-    logging_chat_id = os.environ['LOGGING_BOT_CHAT_ID']
-    logging_bot = telegram.Bot(token=logging_bot_token)
-    logger = get_logger(logging_bot, logging_chat_id)
+
     logger.info('Telegram бот запущен')
     try:
         implicit()

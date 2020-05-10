@@ -1,12 +1,14 @@
 import random
 import os
+import logging
 from dotenv import load_dotenv
 import telegram
 from vk_api.longpoll import VkLongPoll, VkEventType
 from vk_api import VkApi
-from bots_tg_logger import get_logger
+from logs_handler import MyLogsHandler
 from dialogflow_utils import detect_intent_texts, implicit
 
+logger = logging.getLogger('bots_logger')
 
 def reply(event, vk_api):
     reply = detect_intent_texts(PROJECT_ID, event.user_id, event.text, LANGUAGE_CODE)
@@ -21,13 +23,18 @@ def reply(event, vk_api):
 
 if __name__ == "__main__":
     load_dotenv()
-    TOKEN = os.environ['VK_BOT_TOKEN']
-    PROJECT_ID = os.environ['DIALOGFLOW_PROJECT_ID']
-    LANGUAGE_CODE = 'ru-RU'
+    logging.basicConfig(
+        format='%(asctime)s - %(levelname)s - %(message)s')
+    logger.setLevel(logging.DEBUG)
     logging_bot_token = os.environ['LOGGING_BOT_TOKEN']
     logging_chat_id = os.environ['LOGGING_BOT_CHAT_ID']
     logging_bot = telegram.Bot(token=logging_bot_token)
-    logger = get_logger(logging_bot, logging_chat_id)
+    logger.addHandler(MyLogsHandler(logging_bot, logging_chat_id))
+
+    TOKEN = os.environ['VK_BOT_TOKEN']
+    PROJECT_ID = os.environ['DIALOGFLOW_PROJECT_ID']
+    LANGUAGE_CODE = 'ru-RU'
+
     logger.info('VK бот запущен')
     try:
         implicit()
