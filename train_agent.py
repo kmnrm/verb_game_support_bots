@@ -1,4 +1,5 @@
 import os
+from json import JSONDecodeError
 from dotenv import load_dotenv
 import logging
 import dialogflow_v2 as dialogflow
@@ -27,11 +28,17 @@ def main():
         agents_client.train_agent(agents_parent)
         logging.info('Trained successfully')
     except PermissionDenied as permission_denied_error:
-        logging.error('Permission denied')
+        logging.error(PermissionDenied.__name__)
         logging.error(permission_denied_error)
     except TypeError as type_error:
-        logging.error('Can not open training questions file')
+        logging.error(f'{TypeError.__name__} - Can not open training questions file')
         logging.error(type_error)
+    except FileNotFoundError as file_not_found_error:
+        logging.error(f'{FileNotFoundError.__name__} - Can not open training questions file')
+        logging.error(file_not_found_error)
+    except JSONDecodeError as json_decode_error:
+        logging.error(f'{JSONDecodeError.__name__} - Can not open training questions file')
+        logging.error(json_decode_error)
     except InvalidArgument as argument_error:
         logging.error(argument_error)
 
