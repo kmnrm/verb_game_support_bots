@@ -19,19 +19,6 @@ def reply_user(bot, update):
     update.message.reply_text(reply)
 
 
-def main():
-    logger.info('Telegram бот запущен')
-    try:
-        implicit()
-        updater = Updater(TOKEN)
-        dp = updater.dispatcher
-        dp.add_handler(CommandHandler("start", start))
-        dp.add_handler(MessageHandler(Filters.text, reply_user))
-        updater.start_polling()
-    except Exception:
-        logger.exception('Бот упал с ошибкой:')
-
-
 if __name__ == '__main__':
     load_dotenv()
     TOKEN = os.environ['TELEGRAM_BOT_TOKEN']
@@ -42,4 +29,13 @@ if __name__ == '__main__':
     logging_chat_id = os.environ['LOGGING_BOT_CHAT_ID']
     logging_bot = telegram.Bot(token=logging_bot_token)
     logger = get_logger(logging_bot, logging_chat_id)
-    main()
+    logger.info('Telegram бот запущен')
+    try:
+        implicit()
+        updater = Updater(TOKEN)
+        dp = updater.dispatcher
+        dp.add_handler(CommandHandler("start", start))
+        dp.add_handler(MessageHandler(Filters.text, reply_user))
+        updater.start_polling()
+    except Exception:
+        logger.exception('Бот упал с ошибкой:')

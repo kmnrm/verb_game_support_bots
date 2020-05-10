@@ -19,7 +19,15 @@ def reply(event, vk_api):
     )
 
 
-def main():
+if __name__ == "__main__":
+    load_dotenv()
+    TOKEN = os.environ['VK_BOT_TOKEN']
+    PROJECT_ID = os.environ['DIALOGFLOW_PROJECT_ID']
+    LANGUAGE_CODE = 'ru-RU'
+    logging_bot_token = os.environ['LOGGING_BOT_TOKEN']
+    logging_chat_id = os.environ['LOGGING_BOT_CHAT_ID']
+    logging_bot = telegram.Bot(token=logging_bot_token)
+    logger = get_logger(logging_bot, logging_chat_id)
     logger.info('VK бот запущен')
     try:
         implicit()
@@ -31,15 +39,3 @@ def main():
                 reply(event, vk_api)
     except Exception:
         logger.exception('Бот упал с ошибкой:')
-
-
-if __name__ == "__main__":
-    load_dotenv()
-    TOKEN = os.environ['VK_BOT_TOKEN']
-    PROJECT_ID = os.environ['DIALOGFLOW_PROJECT_ID']
-    LANGUAGE_CODE = 'ru-RU'
-    logging_bot_token = os.environ['LOGGING_BOT_TOKEN']
-    logging_chat_id = os.environ['LOGGING_BOT_CHAT_ID']
-    logging_bot = telegram.Bot(token=logging_bot_token)
-    logger = get_logger(logging_bot, logging_chat_id)
-    main()

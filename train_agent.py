@@ -8,6 +8,11 @@ from google.api_core.exceptions import PermissionDenied, InvalidArgument
 
 
 def main():
+    load_dotenv()
+    logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                        level=logging.DEBUG)
+    project_id = os.environ['DIALOGFLOW_PROJECT_ID']
+    training_questions_file_name = 'training_questions.json'
     try:
         intents_client = dialogflow.IntentsClient()
         intents_parent = intents_client.project_agent_path(project_id)
@@ -32,9 +37,4 @@ def main():
 
 
 if __name__ == "__main__":
-    load_dotenv()
-    logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                        level=logging.DEBUG)
-    project_id = os.environ['DIALOGFLOW_PROJECT_ID']
-    training_questions_file_name = 'training_questions.json'
     main()
